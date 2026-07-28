@@ -1,6 +1,6 @@
 # 🍇 GrapeGuard: AI-Powered Grape Leaf Disease Detection & Vineyard Yield Forecasting
 
-**GrapeGuard** is an advanced full-stack artificial intelligence application engineered for precision viticulture. The system integrates Deep Learning (CNNs), Computer Vision Out-of-Distribution (OOD) validation, and multi-factor Agronomic Yield Modeling to help grape farmers detect foliar diseases early and forecast vineyard yields, quality grades, and financial profits accurately.
+**GrapeGuard** is an advanced full-stack artificial intelligence application engineered for precision viticulture. The system integrates Deep Learning (CNNs), Computer Vision Out-of-Distribution (OOD) validation, multi-factor Agronomic Yield Modeling, **Multi-Language Localization (Kannada, Hindi, English)**, and a **Mobile-Responsive Glassmorphism Design System** to help grape farmers detect foliar diseases early, forecast vineyard yields, assess quality grades, and calculate financial profits accurately across desktop and mobile devices.
 
 ---
 
@@ -8,21 +8,22 @@
 
 ### **Frontend**
 - **Framework**: React 18, Vite 7
-- **Styling**: Modern Vanilla CSS Design System with HSL Tailored Colors, Dark Mode Accents, and Glassmorphism (`backdrop-filter`)
-- **Speech API**: Web Speech Recognition API (`window.webkitSpeechRecognition`) for voice input dictation
-- **State & Routing**: Custom reactive browser state management with `useMemo` live computation engine
+- **Multi-Language (i18n)**: Custom React `LanguageContext` provider with `translations.js` localization dictionary (**Kannada** default, **Hindi**, **English**), persistent browser `localStorage` saving, and fallback chain.
+- **Responsive Styling**: Mobile-First Vanilla CSS Design System with HSL Tailored Colors, Dark Mode Accents, Glassmorphism (`backdrop-filter`), CSS Grid/Flexbox reflow, Mobile Drawer Navigation, and Touch-optimized media queries (`@media (max-width: 640px)`).
+- **Speech API**: Web Speech Recognition API (`window.webkitSpeechRecognition`) for hands-free voice input dictation.
+- **State & Routing**: Custom reactive browser state management with `useMemo` live computation engine.
 
 ### **Backend**
 - **Framework**: Flask (Python 3.10+)
-- **REST APIs**: Modular endpoints for authentication, disease detection, variety presets, yield forecasting, and history management
-- **Security**: Werkzeug PBKDF2 password hashing with SHA-256 salts, HTTP session management, and strict payload validation
-- **CORS**: `Flask-CORS` cross-origin resource sharing
+- **REST APIs**: Modular endpoints for authentication, disease detection, variety presets, yield forecasting, and history management.
+- **Security**: Werkzeug/Bcrypt PBKDF2 password hashing with SHA-256 salts, HTTP session management, and strict payload validation.
+- **CORS**: `Flask-CORS` cross-origin resource sharing.
 
 ### **Machine Learning & Computer Vision**
 - **Deep Learning Framework**: TensorFlow 2.x / Keras
 - **Neural Network Architecture**: **MobileNetV2 Transfer Learning Backbone** (`mobilenetv2_1.00_224`) fine-tuned for grape leaf disease identification (`healthy`, `black_rot`, `esca`, `leaf_blight`).
-- **Computer Vision**: OpenCV (`cv2`) for HSV foliage segmentation, Canny edge density distribution, and OOD validation
-- **Numerical Processing**: NumPy for matrix transformations and logit distance computation
+- **Computer Vision**: OpenCV (`cv2`) for HSV foliage segmentation, Canny edge density distribution, and OOD validation.
+- **Numerical Processing**: NumPy for matrix transformations and logit distance computation.
 
 ### **Database**
 - **Database Engine**: MongoDB (via `pymongo`)
@@ -36,7 +37,7 @@
 
 ## 🧮 Comprehensive Algorithms Reference List
 
-The application utilizes 14 distinct algorithms across Deep Learning, Computer Vision, Agronomic Science, Financial Economics, and Web Security:
+The application utilizes 16 distinct algorithms across Deep Learning, Computer Vision, Agronomic Science, Financial Economics, Internationalization (i18n), Responsive Mobile UI Design, and Web Security:
 
 ### 1. MobileNetV2 Deep Transfer Learning Architecture Algorithm
 - **Purpose**: MobileNetV2 backbone trained on ImageNet and fine-tuned for grape leaf disease classification to extract spatial features (vein patterns, lesions, spots, chlorosis) with high speed and low memory footprint.
@@ -165,7 +166,29 @@ The application utilizes 14 distinct algorithms across Deep Learning, Computer V
 
 ---
 
-### 14. Web Speech Recognition & Regex Token Parsing Algorithm
+### 14. Multi-Lingual Dynamic i18n Translation & Fallback Resolution Algorithm
+- **Purpose**: Dynamically renders UI strings across **Kannada (`kn`)**, **Hindi (`hi`)**, and **English (`en`)** with automatic fallback traversal and `localStorage` state persistence.
+- **Algorithm Execution Steps**:
+  1. Retrieve user's selected language code $L \in \{\text{'kn'}, \text{'hi'}, \text{'en'}\}$ from `localStorage.getItem('grapeguard_language')` (defaults to **Kannada `kn`**).
+  2. Parse dot-notation translation keys $P = k_1.k_2\dots k_n$ via `t(path)`.
+  3. Traverse nested structure: `TRANSLATIONS[L][k_1][k_2]...[k_n]`.
+  4. If key is missing, automatically fallback to Kannada dictionary (`TRANSLATIONS.kn`).
+  5. If still missing, fallback to English dictionary (`TRANSLATIONS.en`).
+  6. Return translated string or target fallback label.
+
+---
+
+### 15. Responsive Viewport Adaptivity & Mobile Drawer Navigation Algorithm
+- **Purpose**: Ensures 100% responsive usability across smartphone screens ($< 640\text{px}$), tablets ($< 1024\text{px}$), and wide monitors through reactive CSS grid breakpoint reflow and touch-optimized navigation controls.
+- **Key Adaptations**:
+  - **Collapsible Mobile Top Bar**: Automatically renders a top header (`.mobile-top-bar`) with brand logo and animated toggle hamburger button on mobile viewports ($<768\text{px}$).
+  - **Backdrop Overlay Drawer**: Displays a full-height sliding navigation drawer (`.sidebar.mobile-open`) with dark backdrop overlay (`.mobile-drawer-overlay`).
+  - **Horizontal Touch Navigation Bar**: Wraps yield prediction sub-navigation tabs in `-webkit-overflow-scrolling: touch` containers with hidden scrollbars for single-swipe touch scrolling.
+  - **Responsive Grid Reflow**: Automatically transforms 4-column metric grids into $2 \times 2$ or 1-column responsive stacked cards on mobile devices.
+
+---
+
+### 16. Web Speech Recognition & Regex Token Parsing Algorithm
 - **Purpose**: Captures audio input via standard Web Speech API (`webkitSpeechRecognition`), converts speech to string text, and executes Regular Expression matching to extract numerical inputs for vineyard fields:
 - **Regex Expression**:
   $$\text{Pattern} = \texttt{/\textbackslash d+(\textbackslash .\textbackslash d+)?/}$$
@@ -174,10 +197,32 @@ The application utilizes 14 distinct algorithms across Deep Learning, Computer V
 
 ## ✨ Key Features Summary
 
-1. **Grapes Yield Prediction Module (`/grapes-yield`)**: 8 input categories, live interactive sliders, variety presets, 3-tier scenario range (Worst/Expected/Best), financial profit calculator, 7-day action plan.
-2. **Grape Leaf Disease Detection (`/detect`)**: Image uploader, 4-class CNN disease classification, strict OOD leaf verification.
-3. **Unified Scan History (`/history`)**: MongoDB persistence, search filter, detailed report view (`/history/:id`), 1-click PDF/print export.
-4. **Voice Input Dictation**: Hands-free voice typing via microphone icon (`🎤`).
+1. **🌐 Multi-Language Support (Kannada, Hindi, English)**:
+   - Native support for **Kannada (ಕನ್ನಡ - Default)**, **Hindi (हिंदी)**, and **English (ENG)**.
+   - Persistent language selection stored in browser storage.
+   - Comprehensive translation coverage across authentication, nav drawer, disease scanner, yield sliders, variety presets, quality grades, risk factors, 7-day action plans, and scan history.
+   - Interactive `LanguageSelector` segmented bar component available on auth screen & sidebar.
+
+2. **📱 Mobile Responsive & Mobile-First Touch UX**:
+   - Fully optimized for smartphones, tablets, laptops, and desktop displays.
+   - Top header bar with hamburger menu toggle and sliding backdrop drawer on mobile devices.
+   - Touch-optimized slider controls, horizontal swipeable tab bar, auto-fitting cards, and responsive glassmorphism containers.
+
+3. **🌾 Grapes Yield Prediction Module (`/grapes-yield`)**:
+   - Preset variety selector (Thomson Seedless, Dilkhush, Flame Seedless, Cabernet Sauvignon, Bangalore Blue).
+   - 8 input categories, live interactive sliders, voice dictation, 3-tier scenario range (Worst/Expected/Best), financial profit calculator, and 7-day agronomic action plan.
+
+4. **🔬 Grape Leaf Disease Detection (`/detect`)**:
+   - Image uploader with camera capture & drag-and-drop.
+   - 4-class MobileNetV2 CNN disease classification (`healthy`, `black_rot`, `esca`, `leaf_blight`).
+   - Strict 4-stage Out-of-Distribution (OOD) leaf verification pipeline.
+
+5. **📜 Unified Scan History (`/history`)**:
+   - MongoDB persistence for disease detection scans and yield forecast reports.
+   - Search filter, pagination, detailed report view (`/history/:id`), and 1-click PDF/print export.
+
+6. **🎤 Hands-Free Voice Input Dictation**:
+   - Voice typing via microphone icon (`🎤`) with automatic speech-to-digit parsing for field values.
 
 ---
 
@@ -194,11 +239,11 @@ Major project/
 ├── frontend/
 │   ├── src/
 │   │   ├── App.jsx              # Main App wrapper & routing
-│   │   ├── styles.css           # Design System & layout CSS
+│   │   ├── LanguageContext.jsx  # Multi-Language (i18n) Provider & Selector
+│   │   ├── translations.js      # Exhaustive Kannada, Hindi & English Dictionaries
+│   │   ├── styles.css           # Responsive Glassmorphism Design System & Media Queries
 │   │   └── components/
-│   │       ├── GrapesYieldPrediction.jsx  # Yield Calculator Component
-│   │       ├── Detect.jsx                 # Disease Scanner Component
-│   │       └── History.jsx                # Saved History Timeline
+│   │       └── GrapesYieldPrediction.jsx  # Yield Calculator Component
 └── README.md                    # Exhaustive Algorithms & Architecture Document
 ```
 
