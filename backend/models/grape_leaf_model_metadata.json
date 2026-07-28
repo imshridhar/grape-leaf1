@@ -1,0 +1,22 @@
+{
+  "class_counts": {
+    "black_rot": 1180,
+    "esca": 1383,
+    "healthy": 423,
+    "leaf_blight": 1076
+  },
+  "classes": [
+    "black_rot",
+    "esca",
+    "healthy",
+    "leaf_blight"
+  ],
+  "message": "High-accuracy mobilenetv2_transfer_learning trained on grape leaf dataset.",
+  "model_path": "C:\\Users\\shrid\\Downloads\\Major project\\backend\\models\\grape_leaf_model.keras",
+  "model_type": "mobilenetv2_transfer_learning",
+  "total_samples": 4062,
+  "trained_at": "2026-07-27T10:00:40Z",
+  "validation_accuracy": 0.9914,
+  "validation_samples": 812,
+  "version": "2.0"
+}

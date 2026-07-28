@@ -1,0 +1,14 @@
+# Dependencies
+frontend/node_modules/
+node_modules/
+
+# Frontend Build Output
+frontend/dist/
+frontend/dist-ssr/
+
+# Python Virtual Environments
+venv/
+.venv/
+
+# Large Dataset (16,000+ image files)
+backend/Dataset/
